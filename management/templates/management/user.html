@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <a href="{% url 'add_shop' %}">add shop</a>
+    {% if shops%}
+        {% for shop_reader in shops%}
+        <ul>
+          <a href="{% url 'shop_home' shop_name=shop_reader.name %}"><li>{{ shop_reader.name }}</li></a>
+        </ul>
+        {% endfor %}
+    {%else%}
+        <h3>no shops</h3>
+    {% endif %}
+  </body>
+</html>
