@@ -6,12 +6,13 @@ from django.utils import timezone
 
 
 class Shop(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(unique=True, max_length=50, blank=True, null=True)
 
 
 class Category(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
+    shop = models.ForeignKey('Shop', on_delete=models.CASCADE)
 
 
 class Supplier(models.Model):
@@ -27,8 +28,9 @@ class Product(models.Model):
     exp_date = models.DateField(("Date"), default=timezone.now)
     buying_price = models.FloatField(null=True, blank=True, default=None)
     selling_price = models.FloatField(null=True, blank=True, default=None)
-    quantity_reamins = models.FloatField(null=True, blank=True, default=None)
+    quantity_remains = models.FloatField(null=True, blank=True, default=None)
     supplier = models.ForeignKey('Supplier', on_delete=models.CASCADE)
+    minimum_limit = models.FloatField(null=True, blank=True, default=None)
 
 
 class Customer(models.Model):
