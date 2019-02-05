@@ -1,16 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import RegistrationForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
-        print(form.data["username"])
+        print('not valid')
         if form.is_valid():
+            print('valid')
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}! You are now able to login.')
             return redirect('login')
     else:
-        print('hello world')
         form = RegistrationForm()
     return render(request, 'users/register.html', {'form': form})

@@ -11,16 +11,18 @@ class Shop(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
 
-class Product(models.Model):
-    name = models.CharField(max_length=50, blank=True, null=True)
-    category = models.ForeignKey('Category', models.DO_NOTHING, blank=True, null=True)
+# class Product(models.Model):
+#     name = models.CharField(max_length=50, blank=True, null=True)
+    # category = models.ForeignKey('Category', models.DO_NOTHING, blank=True, null=True)
 
 class Supplier(models.Model):
     supplier = models.OneToOneField(User, on_delete=models.CASCADE)
     contact_number = PhoneNumberField(null=False, blank=False, unique=True)
 
 class Item(models.Model):
-    product = models.ForeignKey('Product', models.DO_NOTHING, blank=True, null=True)
+    # product = models.ForeignKey('Product', models.DO_NOTHING, blank=True, null=True)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    category = models.ForeignKey('Category', models.DO_NOTHING, blank=True, null=True)
     shop = models.ForeignKey('Shop', models.DO_NOTHING, blank=True, null=True)
     mfg_date = models.DateField(("Date"), default=timezone.now)
     exp_date = models.DateField(("Date"), default=timezone.now)
@@ -34,10 +36,11 @@ class Customer(models.Model):
     customer = models.OneToOneField(User, on_delete=models.CASCADE)
 
 class Bill(models.Model):
+    customer = models.ForeignKey('Customer', models.DO_NOTHING, blank=True, null=True)
     bill_item = models.ForeignKey('BillItem', models.DO_NOTHING, blank=True, null=True)
 
 class BillItem(models.Model):
-    product = models.ForeignKey('Product', models.DO_NOTHING, blank=True, null=True)
+    Item = models.ForeignKey('Item', models.DO_NOTHING, blank=True, null=True)
     selling_price = models.FloatField(null=True, blank=True, default=None)
     quantity = models.FloatField(null=True, blank=True, default=None)
     total_price = models.FloatField(null=True, blank=True, default=None)
