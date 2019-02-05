@@ -12,7 +12,7 @@ class Shop(models.Model):
 
 class Category(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    shop = models.ForeignKey('Shop', on_delete=models.CASCADE)
+    name = models.CharField(unique=True, max_length=50, blank=True, null=True)
 
 
 class Supplier(models.Model):
