@@ -11,7 +11,7 @@ class Shop(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     shop = models.ForeignKey('Shop', on_delete=models.CASCADE)
 
 
