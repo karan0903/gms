@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <a href="{% url 'add_category' %}">add category</a>
+    {% if category%}
+        {% for category_reader in category%}
+        <ul>
+          <a href="{% url 'category_home' category_name=category_reader.name %}"><li>{{ category_reader.name }}</li></a>
+        </ul>
+        {% endfor %}
+    {%else%}
+        <h3>no category</h3>
+    {% endif %}
+  </body>
+</html>

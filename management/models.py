@@ -15,7 +15,8 @@ class Shop(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, blank=True, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(unique=True, max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -35,8 +36,12 @@ class Product(models.Model):
     buying_price = models.FloatField(null=True, blank=True, default=None)
     selling_price = models.FloatField(null=True, blank=True, default=None)
     quantity_remains = models.FloatField(null=True, blank=True, default=None)
+<<<<<<< HEAD
     minimum_quantity = models.FloatField(null=True, blank=True, default=None)
+=======
+>>>>>>> d9fab9e46fc1c0cf451b1b288cb7bb37e118731d
     supplier = models.ForeignKey('Supplier', on_delete=models.CASCADE)
+    minimum_limit = models.FloatField(null=True, blank=True, default=None)
 
     def __str__(self):
         return self.name

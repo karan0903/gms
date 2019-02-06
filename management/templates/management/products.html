@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <!-- <a href="{% url 'add_product'%}">add a product</a> -->
+    {% if products %}
+        {%for product_reader in products%}
+            <table>
+              <tr>
+                <td>{{product_reader.name}}</td>
+                <td>{{product_reader.selling_price}}</td>
+              </tr>
+            </table>
+        {%endfor%}
+    {% else %}
+    <h1>no products</h1>
+    {% endif %}
+  </body>
+</html>
