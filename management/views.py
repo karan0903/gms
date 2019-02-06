@@ -6,8 +6,12 @@ from management.models import Shop, Category, Product, Supplier, Customer, Bill
 from django.http import HttpResponse
 
 
-@login_required
 def landing_page(request):
+    return render(request, 'management/landing_page.html')
+
+
+@login_required
+def user_home(request):
     current_user = request.user
     shops = Shop.objects.filter(owner=current_user)
     if shops.count() > 0:

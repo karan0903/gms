@@ -126,4 +126,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-LOGIN_REDIRECT_URL = 'landing_page'
+LOGIN_REDIRECT_URL = 'user_home'
