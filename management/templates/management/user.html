@@ -1,19 +1,39 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <a href="{% url 'add_shop' %}">add shop</a>
-    {% if shops%}
-        {% for shop_reader in shops%}
-        <ul>
-          <a href="{% url 'shop_home' shop_name=shop_reader.name %}"><li>{{ shop_reader.name }}</li></a>
-        </ul>
-        {% endfor %}
-    {%else%}
-        <h3>no shops</h3>
-    {% endif %}
-  </body>
-</html>
+{% extends 'management/base.html'%}
+{% load static %}
+
+
+{% block content %}
+{% if shops%}
+            <div class="shop_container">
+                {% for shop_reader in shops%}  
+                <a href="{% url 'shop_home' shop_name=shop_reader.name %}">
+                    <div class="shop_card">
+                        <h3>{{ shop_reader.name }}</h3>
+                    </div>
+                  </a>
+    
+                  <!-- <a href="{% url 'shop_home' shop_name=shop_reader.name %}"><li>{{ shop_reader.name }}</li></a> -->
+                {% endfor %}
+                <a href="{% url 'add_shop' %}">
+                    <div class="shop_card">
+                        <i class="fas fa-plus-circle" id="fas1"></i>
+                        <h3 id="fas_add">Add Shop</h3>
+                    </div>
+                  </a>
+            </div>
+            
+            
+        {%else%}
+            <div class="no_shop">
+              <h3>You don't have any shop listed. Add one now!</h3>
+           </div>
+           <a href="{% url 'add_shop' %}">
+              <div class="add_shop_card">
+                  <i class="fas fa-plus-circle"></i>
+                  <h3>Add Shop</h3>
+              </div>
+            </a>
+            
+        {% endif %}
+{% endblock %}
+  

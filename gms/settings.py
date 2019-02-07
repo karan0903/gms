@@ -128,3 +128,4 @@ STATIC_URL = '/static/'
 
 
 LOGIN_REDIRECT_URL = 'user_home'
+LOGOUT_REDIRECT_URL = 'landing_page'

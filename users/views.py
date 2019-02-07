@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from management.models import Category
 
 def register(request):
     if request.method == 'POST':

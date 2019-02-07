@@ -15,7 +15,16 @@ class CategoryForm(forms.ModelForm):
         fields = ('name',)
 
 #
-# class ProductForm(forms.ModelForm):
-#     class Meta:
-#         model = Product
-#         fields = ('product', 'mfg_date', 'exp_date', 'buying_price', 'selling_price', 'quantity_reamins', 'supplier',)
+class ProductForm(forms.Form):
+    name = forms.CharField()
+    buying_price = forms.FloatField()
+    selling_price = forms.FloatField()
+    quantity_remains = forms.FloatField()
+    supplier = forms.CharField()
+    minimum_quantity = forms.FloatField()
+
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields=('name','email',)
+    

@@ -6,7 +6,7 @@
   </head>
   <body>
     {%for shop_reader in shop%}
-        <a href="{% url 'manageitems' shop_name=shop_reader.name %}"><li>manageitems</li></a>
+        <a href="{% url 'manageitems' shop_name=shop_reader.name %}"><li>manage items</li></a>
         <a href="#">billing</a>
     {%endfor%}
   </body>

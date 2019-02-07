@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .forms import ShopForm, CategoryForm
+from .forms import ShopForm, CategoryForm, ProductForm, SupplierForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from management.models import Shop, Category, Product, Supplier, Customer, Bill
 from django.http import HttpResponse
+from django.shortcuts import redirect
 
 
 def landing_page(request):
@@ -20,12 +21,12 @@ def user_home(request):
         return render(request, 'management/user.html')
 
 
-@login_required
-def shop_home(request, shop_name):
-    # return HttpResponse('ok'+str(shop_name))
-    shop = Shop.objects.filter(name=shop_name)
-    print(shop)
-    return render(request, 'management/shophome.html', {'shop': shop})
+# @login_required
+# def shop_home(request, shop_name):
+#     # return HttpResponse('ok'+str(shop_name))
+#     shop = Shop.objects.filter(name=shop_name)
+#     print(shop)
+#     return render(request, 'management/shophome.html', {'shop': shop})
 
 
 @login_required
@@ -41,7 +42,7 @@ def manageitems(request, shop_name):
 
 @login_required
 def add_shop(request):
-    if request.method == 'GET':
+    if request.method == 'GET': 
         form = ShopForm()
         return render(request, 'management/addshop.html', {'form': form})
     elif request.method == "POST":
@@ -50,12 +51,7 @@ def add_shop(request):
             shops = form.save(commit=False)
             shops.owner = request.user
             shops.save()
-            print(shops)
-            shops = Shop.objects.filter(owner=request.user)
-            if len(shops) > 0:
-                return render(request, 'management/user.html', {'shops': shops})
-            else:
-                return render(request, 'management/user.html')
+            return redirect('user_home')
 
 
 @login_required
@@ -80,15 +76,56 @@ def add_category(request):
 
 
 @login_required
-def category_home(request, category_name):
+def category_home(request, shop_name):
+    # return HttpResponse('ok'+str(shop_name))
     # category_name = Category.objects.filter(name=category_name)
-    products = Product.objects.all()
-    # print(products)
-    # return HttpResponse('ok'+str(category_name))
+    shop=Shop.objects.get(name = shop_name)
+    products = Product.objects.filter(shop=shop)
+    # return HttpResponse('ok'+str(shop_name))
     # # print(shop)
-    return render(request, 'management/products.html', {'products': products})
+    return render(request, 'management/products.html', {'products': products, 'shops':shop})
 
 
 @login_required
-def add_product(request):
-    return HttpResponse('ok')
+def add_product(request, shop_name):
+    if request.method == 'GET':
+        form = ProductForm()
+        return render(request, 'management/product.html', {'form': form})
+    elif request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            shop = Shop.objects.get(name=shop_name)
+            data = form.cleaned_data
+            # user = Supplier.objects.get(name=data['supplier'])
+            supplier = Supplier.objects.get(name=data['supplier'])
+            category = Category.objects.get(id=1)
+            product = Product()
+            product.supplier = supplier
+            product.shop = shop
+            product.name = data['name']
+            product.category = category
+            product.buying_price = data['buying_price']
+            product.selling_price = data['selling_price']
+            product.quantity_remains = data['quantity_remains']
+            product.minimum_quantity = data['minimum_quantity']
+            product.save()
+            return redirect('shop_home', shop_name)
+
+@login_required
+def suppliers(request):
+    suppliers = Supplier.objects.all()
+    return render(request, 'management/suppliers.html', {'suppliers': suppliers})
+
+
+@login_required
+def add_supplier(request):
+    if request.method == 'GET':
+        form = SupplierForm()
+        return render(request, 'management/add_supplier.html', {'form': form})
+    elif request.method == "POST":
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            supplier = form.save(commit=False)
+            supplier.save()
+            return redirect('suppliers')
+

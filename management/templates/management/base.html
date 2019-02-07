@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'management/user.css' %}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+        <nav class="nav-menu">
+          <div class="nav-div">
+            <ul>
+                <li><a href="{% url 'landing_page'%}"  id="logo">GMS</a></li>
+                <li><a href="{% url 'landing_page' %}">Home</a></li>
+            </ul>
+          </div>
+          <div class="nav-div">
+              <ul>
+                  <li><a href="{% url 'add_shop' %}" class="add_shop">Add shop</a></li>
+                  <li><a href="{% url 'suppliers' %}" class="add_shop">Suppliers</a></li>
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
+              </ul>
+          </div>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+        
+        
+    </div>
+    
+  </body>
+</html>

@@ -15,7 +15,6 @@ class Shop(models.Model):
 
 
 class Category(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(unique=True, max_length=50, blank=True, null=True)
 
     def __str__(self):
@@ -23,8 +22,8 @@ class Category(models.Model):
 
 
 class Supplier(models.Model):
-    supplier = models.CharField(max_length=100)
-    contact_number = PhoneNumberField(null=False, blank=False, unique=True)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=150)
 
 
 class Product(models.Model):
@@ -37,7 +36,7 @@ class Product(models.Model):
     selling_price = models.FloatField(null=True, blank=True, default=None)
     quantity_remains = models.FloatField(null=True, blank=True, default=None)
     supplier = models.ForeignKey('Supplier', on_delete=models.CASCADE)
-    minimum_limit = models.FloatField(null=True, blank=True, default=None)
+    minimum_quantity = models.FloatField(null=True, blank=True, default=None)
 
     def __str__(self):
         return self.name
@@ -45,7 +44,8 @@ class Product(models.Model):
 
 
 class Customer(models.Model):
-    customer = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length = 150)
 
 
 class Bill(models.Model):
