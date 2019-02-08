@@ -23,12 +23,18 @@
         {%endfor%}
       </table>
     {% else %}
-    <h1>no products</h1>
+    <h1 class="xyz">no products</h1>
     {% endif %}
-    <button class="add_p">
+    <button class="add_p tem">
       <a href="{% url 'add_product' shop_name=shops.name %}">addproduct</a>
     </button>
     <button class="add_p">
-      <a href="#">Bill</a>
+      <a href="{% url 'bill' shop_id=shops.id %}">Bill</a>
     </button>
+    <button class="add_p">
+        <a href="{% url 'add_expense' shop_name=shops.name %}">addexpense</a>
+      </button>
+      <button class="add_p">
+        <a href="{% url 'profit_loss' shop_name=shops.name %}">profit & loss</a>
+      </button>
 {% endblock %}

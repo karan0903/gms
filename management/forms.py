@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from management.models import Shop, Category, Product, Supplier, Customer, Bill
+from management.models import Shop, Category, Product, Supplier, Customer, Bill, Expense
 
 
 class ShopForm(forms.ModelForm):
@@ -28,5 +28,13 @@ class SupplierForm(forms.ModelForm):
         model = Supplier
         fields=('name','email',)
 
+class ExpenseForm(forms.ModelForm):
+    class Meta:
+        model = Expense
+        fields = ('employee_expense', 'travel_expense', 'additional_expense', 'date',)
 
+
+class ProfitLossForm(forms.Form):
+    year = forms.IntegerField()
+    month = forms.ChoiceField(choices=[(x, x) for x in range(1, 13)])
     

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'management/bill.css' %}" />
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+<script>
+
+    var products = {{% for product in products %}
+           '{{product.id}}' : {
+             'id': '{{product.id}}',
+             'name': '{{product.name}}',
+             'price':'{{product.selling_price}}',
+             'quantity_remains': parseInt('{{product.quantity_remains}}')
+          },
+        {% endfor %}}
+    
+</script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-5 col-md-5 bill_dashboard">
+                <div class="owner_pannel">
+                    <h2><span style="color:coral">{{shop.name}}</span>  Bill System</h2>
+                    <hr>
+                    <div class="pannel">
+                            <form id='customer_info' >
+                                <label for="customer_name">Customer Name:
+
+                                        <input id="customername" type="text" list="names" class="form-control" name="customername" onkeydown="find_customer(event)" >
+                                        <datalist id="names">
+                                            
+                                        </datalist>
+                                    </label>
+                                <label for="customer_number">Customer Phone Number:
+
+                                        <input id="phonenumber" type="text" class="form-control" pattern="[6-9][0-9]{9}" name="phonenumber">
+                                        <p class="validation-message alert alert-danger">The phone number should be 10 digits</p>
+                                </label>
+                                <label for="customer_number">Email:
+
+                                    <input id="phonenumber" type="email" class="form-control"  name="email">
+                                    <p class="validation-message alert alert-danger">Invalid email</p>
+                            </label>
+
+                                <label for="customer-address">
+                                    Address:
+                                    <textarea class="form-control" id="address" cols="20" rows="2" name="customeraddress"></textarea>
+                                </label>
+                            <button type="submit" class="btn btn-warning pull-right">Add Customer</button>
+                           <br>
+                               
+                        </form>
+                                <hr>
+                                
+                                <div class="product-select">
+                                    <span>
+                                            <select name="product" id="sel_product" id="product_selector">
+                      
+                                                    {% for product in products %}
+                                                        <option value="{{product.id}}">
+                                                            {{product.name}}
+                                                        </option>
+                                                    {% endfor %}
+    
+                                                    <option selected="selected" value="null">---Noting Selected</option>
+                                                </select>
+                            
+                                        <input type="number" value="1" min=1 max=5  id='sel_quantity' >        
+                                    </span>
+                                    <span>
+                                            <button onclick="select_product(document.getElementById('sel_product'), document.getElementById('sel_quantity').value)" class="add_product btn btn-primary pull-right">
+                                                    ADD
+                                                   </button>
+                                            <button id="generate_menu" class="btn btn-default">
+                                                    Generate Bill
+                                            </button>         
+                                            
+                                           
+                                    </span>
+                                    <hr>
+                                    <hr>
+                                <div class="bbb">
+                                        <button id="confirm_bill" class="btn btn-danger" style="width:50%">
+                                                Confirm Bill
+                                        </button>
+                                        <button id="confirm_bill" class="btn btn-danger" style="width: 50%">
+                                                <a href="{% url 'user_home'%}">Home</a> 
+                                        </button>
+                                </div>
+                                
+                                </div>
+                           
+                            
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-xs-7 col-md-7">
+                <div class="output_options pull-right">
+                        <span>
+                            <i class="fa fa-print"></i>
+                        </span>
+                        <span>
+                                <i class="fa fa-file-pdf-o"></i>
+                            </span>
+                </div>    
+                    <div class="notification">
+                        
+                    </div>
+                    <div class="note rough yellow">
+                        <div class="bill_header">
+                            <h2 class="bill_title">
+                                Your Invoice
+                                
+                            </h2>
+                        </div>
+                        <div class="products_info">
+                            <p class="span">
+                                <table id="product_table" class="table table-responsive ">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                        
+                                </table>
+                            </p>
+
+                        </div>
+                        <div class="customer-info">
+                            <p><i class="fa fa-user"></i>Customer Name : <span id="customer_name"></span></p>
+                            <p><i class="fa fa-phone"></i>Customer Contact : <span id="customer_phone"></span></p>
+                            <p><i class="fa fa-home"></i>Address :<span id="customer-address"></span></p>
+                        </div>        
+                        
+                    </div>
+            </div>
+        </div>
+    </div>
+        
+
+        <script src="{% static 'management/bill.js' %}">
+        </script>
+        
+       
+</body>
+</html>

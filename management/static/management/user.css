@@ -296,3 +296,18 @@ table {
 .product{
     margin-top: 0px;
 }
+
+.tem{
+    position: relative;
+    left: 10%;
+    margin-right: -260px;
+}
+
+.abc{
+    margin-top: 80px;
+}
+.xyz{
+    color: white;
+    font-size: 2em;
+    margin-left: 8em;
+}

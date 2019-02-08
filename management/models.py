@@ -47,6 +47,8 @@ class Product(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length = 150)
+    phone_number = models.CharField(max_length=10, blank=True)
+    address = models.TextField(blank=True)
 
 
 class Bill(models.Model):
@@ -67,3 +69,15 @@ class BillItem(models.Model):
     @property
     def total_price(self):
         return self.selling_price * self.quantity
+
+
+class Expense(models.Model):
+    employee_expense = models.FloatField(default=0)
+    travel_expense = models.FloatField(default=0)
+    additional_expense = models.FloatField(default=0)
+    shop = models.ForeignKey('Shop', on_delete=models.CASCADE)
+    date = models.DateTimeField(("Date"), default=datetime.date.today)
+
+    @property
+    def total_expense(self):
+        return self.employee_expense + self.travel_expense + self.additional_expense
