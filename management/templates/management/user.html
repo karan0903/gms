@@ -8,6 +8,7 @@
                 {% for shop_reader in shops%}  
                 <a href="{% url 'shop_home' shop_name=shop_reader.name %}">
                     <div class="shop_card">
+                        <img src="../static/management/images/shop.jpeg" class="shop_image">
                         <h3>{{ shop_reader.name }}</h3>
                     </div>
                   </a>
@@ -17,7 +18,10 @@
                 <a href="{% url 'add_shop' %}">
                     <div class="shop_card">
                         <i class="fas fa-plus-circle" id="fas1"></i>
-                        <h3 id="fas_add">Add Shop</h3>
+                        <div>
+                                <h3 class="temp_add">Add Shop</h3>
+                        </div>
+                        
                     </div>
                   </a>
             </div>

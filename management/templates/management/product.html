@@ -1,10 +1,23 @@
 {% extends 'management/base.html'%}
+{% load crispy_forms_tags %}
 
 {% block content %}
-  <div class="">
-      <form method="POST" class="post-form">{% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="save btn btn-default">Save</button>
-          </form>
-  </div>
+<div class="header-main product">
+  <h1>Add details</h1>
+    <div class="header-bottom">
+        <div class="header-left-bottom">
+            <form method="POST" class="post-form">{% csrf_token %}
+                {{ form.as_p }}
+                
+                <!-- <button type="submit" class="save btn btn-default">Save</button> -->
+                <div class="bottom">
+                    <input type="submit" value="Save" />
+                </div>
+                </form>
+        </div>
+    </div>
+    
+</div>
+  
+        
 {% endblock %}

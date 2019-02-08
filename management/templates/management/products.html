@@ -1,16 +1,34 @@
 {% extends 'management/base.html'%}
 {% block content %}
   {% if products %}
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>C.P</th>
+            <th>S.P</th>
+            <th>Q. Available</th>
+            <th>Supplier</th>
+            <th>Minimum Q.</th>
+          </tr>
         {%for product_reader in products%}
-            <table>
-              <tr>
-                <td>{{product_reader.name}}</td>
+            <tr>
+                <td><a href="#">{{product_reader.name}}</a></td>
+                <td>{{product_reader.buying_price}}</td>
                 <td>{{product_reader.selling_price}}</td>
+                <td>{{product_reader.quantity_remains}}</td>
+                <td>{{product_reader.supplier}}</td>
+                <td>{{product_reader.minimum_quantity}}</td>
               </tr>
-            </table>
+              
         {%endfor%}
+      </table>
     {% else %}
     <h1>no products</h1>
     {% endif %}
-     <a href="{% url 'add_product' shop_name=shops.name %}"><li>addproduct</li></a>
+    <button class="add_p">
+      <a href="{% url 'add_product' shop_name=shops.name %}">addproduct</a>
+    </button>
+    <button class="add_p">
+      <a href="#">Bill</a>
+    </button>
 {% endblock %}

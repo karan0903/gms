@@ -1,9 +1,37 @@
 {% extends 'management/base.html'%}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<div class="">
+<!-- <div class="">
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
         </form>
-</div>
+</div> -->
+<div class="header-main">
+        <h1>Add supplier</h1>
+            <!---728x90--->
+
+    <div class="header-bottom">
+        <div class="header-right w3agile">
+            <div class="header-left-bottom agileinfo">
+                <form  method="POST">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <!-- <div class="icon1"> 
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <input type="email" placeholder="Enter your email" name='email' required=""/>
+                    </div>
+                    <div class="icon1">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <input type="password" placeholder="Create password" name='password1' required=""/>
+                    </div> -->
+                    <div class="bottom">
+                        <input type="submit" value="login"/>
+                </div>  
+            </form>	
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

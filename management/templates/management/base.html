@@ -6,6 +6,8 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="{% static 'management/user.css' %}" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -18,6 +20,7 @@
           </div>
           <div class="nav-div">
               <ul>
+                  <li><a href="{% url 'user_home' %}" class="add_shop">Shops</a></li>
                   <li><a href="{% url 'add_shop' %}" class="add_shop">Add shop</a></li>
                   <li><a href="{% url 'suppliers' %}" class="add_shop">Suppliers</a></li>
                   <li><a href="{% url 'logout' %}">Logout</a></li>

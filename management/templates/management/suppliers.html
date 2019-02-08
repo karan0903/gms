@@ -1,18 +1,24 @@
 {% extends 'management/base.html'%}
 {% block content %}
   {% if suppliers %}
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
         {%for supplier in suppliers%}
-            <table>
               <tr>
                 <td>{{supplier.name}}</td>
                 <td>{{supplier.email}}</td>
               </tr>
-            </table>
         {%endfor%}
+      </table>
     {% else %}
     <h1>no Suppliers</h1>
     {% endif %}
-     <a href="{% url 'add_supplier'%}"><li>Add supplier</li></a>
+     <button class="add_p">
+        <a href="{% url 'add_supplier' %}">Add supplier</a>
+      </button>
 {% endblock %}
 
 

@@ -96,7 +96,6 @@ def add_product(request, shop_name):
         if form.is_valid():
             shop = Shop.objects.get(name=shop_name)
             data = form.cleaned_data
-            # user = Supplier.objects.get(name=data['supplier'])
             supplier = Supplier.objects.get(name=data['supplier'])
             category = Category.objects.get(id=1)
             product = Product()
@@ -128,4 +127,9 @@ def add_supplier(request):
             supplier = form.save(commit=False)
             supplier.save()
             return redirect('suppliers')
+
+@login_required
+def update_db(request):
+    pass
+
 
